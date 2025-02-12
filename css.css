@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: 23%;
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    background-color: aliceblue;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+h2 {
+    background-color: paleturquoise;
+    border-radius: 15px;
+    text-align: center;
+    padding: 10px;
+}
+
+.new-card-form {
+    margin-bottom: 20px;
+}
+
+button {
+    border-radius: 15px;
+    padding: 10px 20px;
+    margin: 5px;
+}
+
+input, textarea {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    width: 50%;
+}

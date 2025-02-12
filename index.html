@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="js/vue.js"></script>
+    <script defer src="js/main.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <title>Kanban</title>
+</head>
+<body>
+<div id="app">
+    <div class="new-card-form">
+        <h2>Создать новую карточку</h2>
+        <input v-model="newCardTitle" placeholder="Заголовок карточки" />
+        <textarea v-model="newCardDescription" placeholder="Описание задачи"></textarea>
+        <input type="date" v-model="newCardDeadline" />
+        <button @click="createCard">Создать карточку</button>
+    </div>
+
+    <div v-if="editingCard" class="modal">
+        <div class="modal-content">
+            <h2>Редактирование карточки</h2>
+            <input v-model="editingCard.title" placeholder="Заголовок" />
+            <textarea v-model="editingCard.description" placeholder="Описание задачи"></textarea>
+            <input type="date" v-model="editingCard.deadline" />
+            <button @click="saveEditedCard">Сохранить</button>
+            <button @click="cancelEdit">Отмена</button>
+        </div>
+    </div>
+
+    <div class="columns">
+        <div class="column">
+            <h2>Запланированные задачи</h2>
+            <note-card v-for="card in cards.filter(c => c.column === 1)" :key="card.id" :card="card" :column="1"
+                       @edit-card="editCard" @delete-card="deleteCard" @move-card="moveCard"></note-card>
+        </div>
+        <div class="column">
+            <h2>Задачи в работе</h2>
+            <note-card v-for="card in cards.filter(c => c.column === 2)" :key="card.id" :card="card" :column="2"
+                       @edit-card="editCard" @delete-card="deleteCard" @move-card="moveCard"></note-card>
+        </div>
+        <div class="column">
+            <h2>Тестирование</h2>
+            <note-card v-for="card in cards.filter(c => c.column === 3)" :key="card.id" :card="card" :column="3"
+                       @edit-card="editCard" @delete-card="deleteCard" @move-card="moveCard"></note-card>
+        </div>
+        <div class="column">
+            <h2>Выполненные задачи</h2>
+            <note-card v-for="card in cards.filter(c => c.column === 4)" :key="card.id" :card="card" :column="4"
+                       @edit-card="editCard" @delete-card="deleteCard" @move-card="moveCard"></note-card>
+        </div>
+    </div>
+</div>
+</body>
+</html>
