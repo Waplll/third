@@ -1,81 +1,165 @@
-* {
+/* Общие настройки */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+#app {
+    width: 95vw;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 h1 {
     text-align: center;
-}
-
-h2 {
     color: #333;
-    border: solid black;
-    border-radius: 5px;
-    text-align: center;
 }
 
-.new-card-form, .modal {
-    background: white;
-    padding: 20px;
+/* Стили для создания карточки */
+.create-card {
     margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    background-color: #eef6ff;
+    border: 1px solid #cde2ff;
+    border-radius: 8px;
 }
 
-.card {
-    background: #6186AA;
-    padding: 10px;
-    margin: 10px 0;
+.create-card input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 14px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    color: white;
+    border-radius: 4px;
 }
 
+.create-card button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-card button:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для редактирования карточки */
+.edit-card {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #eef6ff;
+    border: 1px solid #cde2ff;
+    border-radius: 8px;
+}
+
+.edit-card input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.edit-card button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-card button:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для столбцов */
 .columns {
     display: flex;
+    gap: 20px;
     justify-content: space-between;
-    gap: 5px;
 }
 
 .column {
-    width: 24%;
-    padding: 10px;
-    border-radius: 5px;
-    border: solid black;
-    display: flex;
-    flex-direction: column;
+    flex: 1;
+    min-width: 250px;
+    padding: 15px;
+    background-color: #eef6ff;
+    border: 1px solid #cde2ff;
+    border-radius: 8px;
 }
 
-button {
-    margin: 10px 0 0 0;
-    padding: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    border-color: #ccc;
+.column h2 {
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+/* Стили для карточек */
+.card {
+    margin-bottom: 15px;
+    padding: 15px;
     background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-input {
-    padding: 1vw 1vh;
-    border-radius: 5px;
+.card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
 }
 
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
 }
 
-.modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+.card button {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: white;
+    background-color: #a3d2ff; /* Бледно-синий цвет */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+    background-color: #7abeff; /* Темнее при наведении */
+}
+
+/* Стили для кнопки очистки */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #dc3545; /* Красный цвет */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #c82333; /* Темнее при наведении */
 }
