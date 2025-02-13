@@ -1,15 +1,8 @@
 let eventBus = new Vue();
-
 Vue.component('note-card', {
     props: {
-        card: {
-            type: Object,
-            required: true
-        },
-        column: {
-            type: Number,
-            required: true
-        }
+        card: { type: Object, required: true },
+        column: { type: Number, required: true }
     },
     template: `
         <div class="card">
@@ -36,26 +29,14 @@ Vue.component('note-card', {
         </div>
     `,
     methods: {
-        editCard() {
-            this.$emit('edit-card', this.card);
-        },
-        deleteCard() {
-            this.$emit('delete-card', this.card);
-        },
-        moveToInProgress() {
-            this.$emit('move-card', this.card, 2);
-        },
-        moveToTesting() {
-            this.$emit('move-card', this.card, 3);
-        },
-        moveToCompleted() {
-            this.$emit('move-card', this.card, 4);
-        },
+        editCard() { this.$emit('edit-card', this.card); },
+        deleteCard() { this.$emit('delete-card', this.card); },
+        moveToInProgress() { this.$emit('move-card', this.card, 2); },
+        moveToTesting() { this.$emit('move-card', this.card, 3); },
+        moveToCompleted() { this.$emit('move-card', this.card, 4); },
         moveBackToInProgress() {
             const reason = prompt("Введите причину возврата:");
-            if (reason) {
-                this.$emit('move-card-back', this.card, 2, reason);
-            }
+            if (reason) { this.$emit('move-card-back', this.card, 2, reason); }
         },
         formatDeadline(deadline) {
             const date = new Date(deadline);
@@ -63,7 +44,6 @@ Vue.component('note-card', {
         }
     }
 });
-
 Vue.component('create-card', {
     template: `
         <div>
@@ -75,38 +55,20 @@ Vue.component('create-card', {
         </div>
     `,
     data() {
-        return {
-            title: '',
-            description: '',
-            deadline: ''
-        };
+        return { title: '', description: '', deadline: '' };
     },
     methods: {
         createCard() {
             if (this.title.trim() && this.description.trim() && this.deadline) {
-                this.$emit('card-created', {
-                    title: this.title,
-                    description: this.description,
-                    deadline: this.deadline
-                });
+                this.$emit('card-created', { title: this.title, description: this.description, deadline: this.deadline });
                 this.resetForm();
             }
         },
-        resetForm() {
-            this.title = '';
-            this.description = '';
-            this.deadline = '';
-        }
+        resetForm() { this.title = ''; this.description = ''; this.deadline = ''; }
     }
 });
-
 Vue.component('edit-card', {
-    props: {
-        card: {
-            type: Object,
-            required: true
-        }
-    },
+    props: { card: { type: Object, required: true } },
     template: `
         <div>
             <h3>Редактировать карточку</h3>
@@ -117,19 +79,24 @@ Vue.component('edit-card', {
             <button @click="$emit('cancel')">Отмена</button>
         </div>
     `,
-    methods: {
-        save() {
-            this.$emit('save', this.card);
-        }
-    }
+    methods: { save() { this.$emit('save', this.card); } }
 });
-
 let app = new Vue({
     el: '#app',
     data: {
         cards: [],
         nextCardId: 1,
-        editingCard: null
+        editingCard: null,
+        searchQuery: ''
+    },
+    computed: {
+        filteredCards() {
+            return [1, 2, 3, 4].map(column => {
+                return this.cards
+                    .filter(card => card.column === column)
+                    .filter(card => card.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
+            });
+        }
     },
     methods: {
         addCard(cardData) {
@@ -150,9 +117,7 @@ let app = new Vue({
             this.nextCardId = 1;
             this.saveData();
         },
-        editCard(card) {
-            this.editingCard = JSON.parse(JSON.stringify(card));
-        },
+        editCard(card) { this.editingCard = JSON.parse(JSON.stringify(card)); },
         saveEditedCard(card) {
             const index = this.cards.findIndex(c => c.id === card.id);
             if (index !== -1) {
@@ -162,13 +127,8 @@ let app = new Vue({
             this.editingCard = null;
             this.saveData();
         },
-        cancelEdit() {
-            this.editingCard = null;
-        },
-        deleteCard(card) {
-            this.cards = this.cards.filter(c => c.id !== card.id);
-            this.saveData();
-        },
+        cancelEdit() { this.editingCard = null; },
+        deleteCard(card) { this.cards = this.cards.filter(c => c.id !== card.id); this.saveData(); },
         moveCard(card, column) {
             card.column = column;
             if (column === 4) {
@@ -192,15 +152,9 @@ let app = new Vue({
         loadData() {
             const savedCards = localStorage.getItem('cards');
             const savedNextCardId = localStorage.getItem('nextCardId');
-            if (savedCards) {
-                this.cards = JSON.parse(savedCards);
-            }
-            if (savedNextCardId) {
-                this.nextCardId = parseInt(savedNextCardId, 10);
-            }
+            if (savedCards) { this.cards = JSON.parse(savedCards); }
+            if (savedNextCardId) { this.nextCardId = parseInt(savedNextCardId, 10); }
         }
     },
-    mounted() {
-        this.loadData();
-    }
+    mounted() { this.loadData(); }
 });

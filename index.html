@@ -11,6 +11,9 @@
 <body>
 <div id="app">
     <h1>Доска задач</h1>
+    <div class="search-bar">
+        <input v-model="searchQuery" placeholder="Поиск по названию..." />
+    </div>
     <create-card @card-created="addCard"></create-card><br>
     <h3>Удалить все карточки</h3>
     <button @click="clearCards">Очистить все карточки</button><br><br>
@@ -18,7 +21,7 @@
     <div class="columns">
         <div class="column" v-for="column in [1, 2, 3, 4]" :key="column">
             <h2>{{ column === 1 ? 'Новые' : column === 2 ? 'В работе' : column === 3 ? 'На тестировании' : 'Выполнено' }}</h2>
-            <note-card v-for="card in cards.filter(c => c.column === column)" :key="card.id" :card="card" :column="column" @edit-card="editCard" @delete-card="deleteCard" @move-card="moveCard" @move-card-back="moveCardBack"></note-card>
+            <note-card v-for="card in filteredCards[column - 1]" :key="card.id" :card="card" :column="column" @edit-card="editCard" @delete-card="deleteCard" @move-card="moveCard" @move-card-back="moveCardBack"></note-card>
         </div>
     </div>
 </div>
